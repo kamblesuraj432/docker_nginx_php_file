@@ -12,6 +12,11 @@ RUN docker-php-ext-install pdo_mysql \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl \
     && apt-get remove libicu-dev icu-devtools -y
+RUN apt-get update && apt-get install -y \
+    libzip-dev \
+    zip \
+    unzip
+RUN docker-php-ext-install pdo_mysql mysqli zip
 RUN { \
         echo 'opcache.memory_consumption=128'; \
         echo 'opcache.interned_strings_buffer=8'; \
